@@ -8,15 +8,20 @@ ENV DEBIAN_FRONTEND noninteractive
 #
 RUN dpkg --add-architecture i386
 
-RUN apt-get update && apt-get install -y -q software-properties-common
-RUN add-apt-repository ppa:ubuntu-wine/ppa -y
+#RUN apt-get update && apt-get install -y -q software-properties-common
+#RUN add-apt-repository ppa:ubuntu-wine/ppa -y
+
+RUN wget https://dl.winehq.org/wine-builds/Release.key
+RUN sudo apt-key add Release.key
+RUN sudo apt-add-repository 'https://dl.winehq.org/wine-builds/ubuntu/'
 
 RUN apt-get update && apt-get install -y -q	\
 	gawk					\
 	unzip					\
-	wine1.7					\
 	wget					\
 	xvfb
+	
+RUN sudo apt update && sudo apt install --install-recommends winehq-stable
 
 # Again as root since COPY doesn't honor USER
 COPY dotnet_setup.sh /tmp/dotnet_setup3.sh
