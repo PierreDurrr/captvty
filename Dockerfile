@@ -1,4 +1,4 @@
-FROM ubuntu:15.04
+FROM ubuntu:20.04
 MAINTAINER Stephane Bernigaud 
 
 ENV DEBIAN_FRONTEND noninteractive
